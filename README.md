@@ -1,60 +1,64 @@
 # SpectraFormer
 
-**SpectraFormer** 是一个面向多变量工业时间序列缺失值补全的谱感知 Transformer 项目。项目包含 MSSA 分解、Transformer 插补、谱注意力偏置、自适应模态融合，以及传统方法和 PyPOTS 基线。
+**SpectraFormer** is a spectral-aware Transformer project for missing-value imputation in multivariate industrial time series. It combines multivariate singular spectrum analysis (MSSA), Transformer-based imputation, spectral attention bias, adaptive modality fusion, classical interpolation methods, and PyPOTS baselines.
 
-> 当前版本：`0.3.0`。根目录 [main.py](main.py) 是统一入口，可通过交互菜单或命令行选择不同模型版本。
+> Current version: `0.3.0`. The root-level [`main.py`](main.py) is the unified entry point for selecting and running different model variants.
 
-## 功能概览
+## Highlights
 
-- 多个 SpectraFormer 演进版本，可从同一个入口启动。
-- SWaT/WADI 结构化缺失生成、40% 缺失对比和消融实验。
-- 传统插值、SAITS、BRITS、iTransformer 等基线。
-- 源码、实验、示例和预处理工具分目录管理。
-- 配套单元测试、环境文档和贡献规范。
+- Multiple SpectraFormer variants available through one command-line interface.
+- Structured missingness generation for SWaT and WADI datasets.
+- Experiments for 40% missing-data comparison and component ablation.
+- Classical interpolation, SAITS, BRITS, iTransformer, and other baselines.
+- Clear separation between reusable source code, experiments, examples, scripts, and tests.
+- Local datasets, generated outputs, and model checkpoints are excluded from Git.
 
-## 项目结构
+## Project Structure
 
 ```text
 .
-├── main.py                         # 统一模型选择入口
-├── spectraformer/                  # 可复用核心包
-│   ├── cli.py                      # 模型注册表与命令行界面
-│   ├── config.py                   # 项目公共路径
-│   ├── structured_missingness.py   # 结构化缺失生成
-│   ├── mssa/                       # SSA/MSSA 算法
-│   └── transformer/                # Transformer 插补模型及变体
-├── experiments/                    # 训练、基线、消融与综合实验
-├── examples/                       # MSSA 和数据流示例
-├── scripts/data_preprocessing/     # CSV 预处理工具
-├── tests/                          # 单元测试
-└── docs/                           # 环境及实验说明
+├── main.py                         # Unified model launcher
+├── spectraformer/                  # Reusable Python package
+│   ├── cli.py                      # Model registry and command-line interface
+│   ├── config.py                   # Shared project paths
+│   ├── structured_missingness.py   # Structured missingness generation
+│   ├── mssa/                       # SSA and MSSA implementations
+│   └── transformer/                # Transformer imputation models
+├── experiments/                    # Training, baseline, and ablation experiments
+├── examples/                       # MSSA and data-flow examples
+├── scripts/data_preprocessing/     # CSV preprocessing utilities
+├── tests/                          # Unit tests
+└── docs/                           # Environment and experiment documentation
 ```
 
-## 模型版本
+## Available Models and Experiments
 
-| 入口键 | 模型/实验 | 主要差异 |
+| Key | Model or experiment | Description |
 |---|---|---|
-| `structured` | 结构化缺失综合实验 | SWaT/WADI、多缺失模式、基线和消融实验 |
-| `transformer` | 基础 Transformer | 基础时序插补版本 |
-| `transformer-kl` | Transformer + KL | 加入 KL 散度约束 |
-| `adaptive-transformer` | 自适应 SpectraFormer | 自适应融合 MSSA 信息 |
-| `mssa-mlp` | MSSA + MLP + Transformer | 使用 MLP 编码 MSSA 模态 |
-| `modal-fusion` | 可学习模态融合 | 学习原始模态与 MSSA 模态权重 |
-| `spectral-bias` | 谱注意力偏置 | 频谱信息参与注意力计算 |
-| `spectral-modal` | 完整插补版本 | MSSA + 谱偏置 + 自适应模态融合 |
-| `classical` | 传统基线 | 前向、后向、线性和多项式插补 |
-| `pypots` | PyPOTS 基线 | SAITS、BRITS、iTransformer 等 |
+| `structured` | Structured missingness experiment | SWaT/WADI experiments, missingness patterns, baselines, and ablations |
+| `transformer` | Base Transformer | Basic time-series imputation model |
+| `transformer-kl` | Transformer + KL | Transformer imputation with KL-divergence regularization |
+| `adaptive-transformer` | Adaptive SpectraFormer | Adaptively integrates MSSA information |
+| `mssa-mlp` | MSSA + MLP + Transformer | Encodes the MSSA modality with an MLP before fusion |
+| `modal-fusion` | Learnable modality fusion | Learns fusion weights for raw and MSSA modalities |
+| `spectral-bias` | Spectral attention bias | Injects frequency-domain information into attention |
+| `spectral-modal` | Full SpectraFormer variant | Combines MSSA, spectral bias, and adaptive modality fusion |
+| `classical` | Classical baselines | Forward, backward, linear, and polynomial interpolation |
+| `pypots` | PyPOTS baselines | SAITS, BRITS, iTransformer, and related models |
+| `mssa-demo` | MSSA example | Runs an MSSA decomposition and visualization example |
 
-完整列表以命令输出为准：
+List the registered entries or inspect one entry without loading training dependencies:
 
-```powershell
+```bash
 python main.py --list-models
 python main.py --info spectral-modal
 ```
 
-## 环境安装
+## Installation
 
-推荐 Python 3.10 或 3.11。Windows PowerShell：
+Python 3.10 or 3.11 is recommended.
+
+### Windows PowerShell
 
 ```powershell
 cd "C:\path\to\SpectraFormer"
@@ -64,118 +68,123 @@ py -3.11 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e . --no-deps
 ```
 
-Linux/macOS：
+### Linux or macOS
 
 ```bash
+cd /path/to/SpectraFormer
 python3.11 -m venv .venv
 ./.venv/bin/python -m pip install --upgrade pip setuptools wheel
 ./.venv/bin/python -m pip install -r requirements.txt
 ./.venv/bin/python -m pip install -e . --no-deps
 ```
 
-如需 NVIDIA GPU，请先按 PyTorch 官方说明安装与驱动匹配的 CUDA 版本，再安装其余依赖。更详细说明见 [docs/environment.md](docs/environment.md)。
+For NVIDIA GPU acceleration, install the PyTorch build that matches your CUDA environment before installing the remaining dependencies. Additional setup notes are available in [`docs/environment.md`](docs/environment.md).
 
-## 使用统一入口
+## Usage
 
-### 交互式选择
+### Interactive model selection
 
-```powershell
+```bash
 python main.py
 ```
 
-程序会显示编号菜单，输入编号或模型键即可启动。
+The launcher displays a numbered menu. Select a model by number or by its key.
 
-### 命令行选择
+### Direct model selection
 
-```powershell
-# 完整谱感知模态融合版本
+```bash
+# Recommended full model
 python main.py --model spectral-modal
 
-# 基础 Transformer
+# Base Transformer
 python main.py --model transformer
 
-# 传统插补基线
+# Classical interpolation baselines
 python main.py --model classical
 ```
 
-安装为可编辑包后，也可以使用：
+After installing the project in editable mode, the console command is also available:
 
-```powershell
+```bash
 spectra-former --list-models
 spectra-former --model spectral-modal
 ```
 
-模型自己的参数放在 `--` 后面。例如只检查结构化实验计划：
+Arguments for an underlying experiment can be placed after `--`:
 
-```powershell
+```bash
 python main.py --model structured -- --plan
 ```
 
-为兼容旧命令，下面的写法仍然有效：
+The original structured-experiment arguments remain supported directly:
 
-```powershell
+```bash
 python main.py --plan
 python main.py --ablation --patterns multi_sensor --output-dir outputs/ablation
 ```
 
-## 结构化缺失实验
+## Structured Missingness Experiments
 
-默认实验覆盖 SWaT/WADI、三种结构化缺失模式、多个基线与本文方法。建议先查看实验矩阵：
+The structured experiment supports SWaT and WADI, multiple missingness patterns, baseline comparisons, and ablation studies. Inspect the experiment matrix before starting a full run:
 
-```powershell
+```bash
 python main.py --model structured -- --plan
 ```
 
-运行指定数据集和模式：
+Run a selected dataset and missingness pattern:
 
-```powershell
-python main.py --model structured -- `
-  --datasets swat `
-  --patterns multi_sensor `
-  --methods linear proposed `
+```bash
+python main.py --model structured -- \
+  --datasets swat \
+  --patterns multi_sensor \
+  --methods linear proposed \
   --epochs 10
 ```
 
-消融实验：
+Run an ablation experiment:
 
-```powershell
-python main.py --model structured -- `
-  --ablation `
-  --patterns multi_sensor `
+```bash
+python main.py --model structured -- \
+  --ablation \
+  --patterns multi_sensor \
   --output-dir outputs/ablation
 ```
 
-详细实验定义见 [docs/structured_missing_experiments.md](docs/structured_missing_experiments.md)。
+See [`docs/structured_missing_experiments.md`](docs/structured_missing_experiments.md) for the experiment definitions.
 
-## 本地数据与运行结果
+## Local Data and Generated Files
 
-数据集、运行结果和模型权重不随仓库发布，相关目录由使用者在本地准备或由程序运行时生成。公共路径定义在 `spectraformer/config.py`，新增代码不应硬编码绝对路径。
+Datasets, generated results, and model checkpoints are not distributed with this repository. Prepare them locally as required by the selected experiment. Shared paths are defined in [`spectraformer/config.py`](spectraformer/config.py); avoid hard-coding absolute paths in new code.
 
-## 测试
+The following local directories are ignored by Git:
 
-```powershell
+- `data/` — local datasets and generated masks
+- `outputs/` — experiment results and plots
+- `artifacts/` — checkpoints and other model artifacts
+
+## Testing
+
+```bash
 python -m unittest discover -s tests -v
 python -m compileall -q spectraformer experiments examples scripts tests
 ```
 
-只验证统一入口、不加载训练依赖：
+Quickly validate the launcher without importing training dependencies:
 
-```powershell
+```bash
 python main.py --list-models
 python main.py --info structured
 ```
 
-## 添加新模型
+## Adding a Model
 
-1. 将可复用模型放入 `spectraformer/` 对应子包。
-2. 将训练或评估入口放入 `experiments/`。
-3. 在 `spectraformer/cli.py` 的 `MODEL_ENTRIES` 中注册入口。
-4. 添加测试，并更新本 README 的模型表。
+1. Add reusable implementation code to the appropriate `spectraformer/` subpackage.
+2. Add the training or evaluation entry point under `experiments/`.
+3. Register the entry in `MODEL_ENTRIES` inside [`spectraformer/cli.py`](spectraformer/cli.py).
+4. Add tests and update the model table in this README.
 
-更多开发约定见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+## Repository
 
-## 项目仓库
+GitHub: [Azusamiao233/SpectraFormer](https://github.com/Azusamiao233/SpectraFormer)
 
-GitHub：[czh4994/SpectraFormer](https://github.com/czh4994/SpectraFormer)
-
-公开使用前请补充合适的 `LICENSE`，并确认 SWaT/WADI 数据及第三方代码的授权要求。
+Before redistributing datasets or third-party code, verify the applicable SWaT, WADI, and dependency licenses. Add a project license before publishing or redistributing the repository as open-source software.
