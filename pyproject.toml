@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mssa-transformer"
+version = "0.2.0"
+description = "MSSA-Transformer time-series imputation and anomaly-detection experiments"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dynamic = ["dependencies"]
+
+[project.scripts]
+mssa-transformer = "mssa_transformer.cli:main"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.packages.find]
+include = ["mssa_transformer*"]

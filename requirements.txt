@@ -1,0 +1,13 @@
+# 推荐使用 Python 3.10 或 3.11。
+# 若需要指定 CUDA 版本，请先按 PyTorch 官网命令安装 torch，再执行本文件。
+numpy>=1.26,<2.0
+pandas>=2.1,<3.0
+scipy>=1.11,<2.0
+scikit-learn>=1.4,<2.0
+matplotlib>=3.8,<4.0
+statsmodels>=0.14,<1.0
+sympy>=1.12,<2.0
+torch>=2.6,<3.0
+torch-geometric>=2.6,<3.0
+pypots>=1.5,<2.0
+
