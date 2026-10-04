@@ -1,4 +1,4 @@
-"""MSSA-Transformer 时间序列插补与异常检测算法包。"""
+"""MSSA-Transformer 多变量时间序列缺失值补全算法包。"""
 
 from .config import ARTIFACTS_DIR, DATA_DIR, OUTPUTS_DIR, PROJECT_ROOT
 

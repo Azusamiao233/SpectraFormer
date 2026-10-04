@@ -15,10 +15,7 @@ dist/
 *.log
 
 # 数据集、实验结果和模型权重不提交到普通 Git 仓库。
-data/**/*.csv
-data/**/*.zip
-outputs/*
-!outputs/README.md
-artifacts/*
-!artifacts/README.md
+/data/
+/outputs/
+/artifacts/
 *.pth

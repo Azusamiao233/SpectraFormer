@@ -18,6 +18,8 @@ class CliTests(unittest.TestCase):
         rendered = format_model_list()
         for key in ("structured", "transformer", "mssa-mlp", "spectral-modal"):
             self.assertIn(key, rendered)
+        self.assertNotIn("gdn", MODEL_REGISTRY)
+        self.assertNotIn("gat-vae", MODEL_REGISTRY)
 
     def test_list_models_does_not_import_training_dependencies(self):
         with patch("builtins.print") as mocked_print:

@@ -97,20 +97,6 @@ MODEL_ENTRIES: tuple[ModelEntry, ...] = (
         "SAITS、BRITS、iTransformer 等 PyPOTS 基线。",
     ),
     ModelEntry(
-        "gdn",
-        "GDN 异常检测",
-        "experiments.anomaly_detection.gdn_experiment",
-        "异常检测",
-        "基于图偏差网络的多变量时序异常检测。",
-    ),
-    ModelEntry(
-        "gat-vae",
-        "Masked GAT-VAE",
-        "mssa_transformer.anomaly.gat_vae",
-        "异常检测",
-        "面向缺失观测的图注意力变分自编码器。",
-    ),
-    ModelEntry(
         "mssa-demo",
         "MSSA 示例",
         "examples.mssa_example",

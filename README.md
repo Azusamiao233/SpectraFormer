@@ -1,6 +1,6 @@
 # mSSA-Transformer
 
-面向多变量工业时间序列的缺失值插补与异常检测研究代码。项目包含 MSSA 分解、Transformer 插补、谱注意力偏置、自适应模态融合、GAT/GDN 异常检测，以及传统方法和 PyPOTS 基线。
+面向多变量工业时间序列缺失值补全的研究代码。项目包含 MSSA 分解、Transformer 插补、谱注意力偏置、自适应模态融合，以及传统方法和 PyPOTS 基线。
 
 > 当前版本：`0.2.0`。根目录 [main.py](main.py) 是统一入口，可通过交互菜单或命令行选择不同模型版本。
 
@@ -9,8 +9,7 @@
 - 多个 MSSA-Transformer 演进版本，可从同一个入口启动。
 - SWaT/WADI 结构化缺失生成、40% 缺失对比和消融实验。
 - 传统插值、SAITS、BRITS、iTransformer 等基线。
-- GDN 与 Masked GAT-VAE 异常检测实验。
-- 数据、源码、实验、输出和模型权重分目录管理。
+- 源码、实验、示例和预处理工具分目录管理。
 - 配套单元测试、环境文档和贡献规范。
 
 ## 项目结构
@@ -23,15 +22,11 @@
 │   ├── config.py                   # 项目公共路径
 │   ├── structured_missingness.py   # 结构化缺失生成
 │   ├── mssa/                       # SSA/MSSA 算法
-│   ├── transformer/                # Transformer 插补模型及变体
-│   └── anomaly/                    # GAT/GDN 异常检测模型
+│   └── transformer/                # Transformer 插补模型及变体
 ├── experiments/                    # 训练、基线、消融与综合实验
 ├── examples/                       # MSSA 和数据流示例
 ├── scripts/data_preprocessing/     # CSV 预处理工具
 ├── tests/                          # 单元测试
-├── data/                           # 本地数据，不提交 Git
-├── outputs/                        # 实验输出，不提交 Git
-├── artifacts/                      # 模型权重，不提交 Git
 └── docs/                           # 环境及实验说明
 ```
 
@@ -49,7 +44,6 @@
 | `spectral-modal` | 完整插补版本 | MSSA + 谱偏置 + 自适应模态融合 |
 | `classical` | 传统基线 | 前向、后向、线性和多项式插补 |
 | `pypots` | PyPOTS 基线 | SAITS、BRITS、iTransformer 等 |
-| `gdn` / `gat-vae` | 异常检测 | 图神经网络异常检测 |
 
 完整列表以命令输出为准：
 
@@ -153,14 +147,9 @@ python main.py --model structured -- `
 
 详细实验定义见 [docs/structured_missing_experiments.md](docs/structured_missing_experiments.md)。
 
-## 数据与输出
+## 本地数据与运行结果
 
-- 数据默认从 `data/` 读取，具体文件结构见 [data/README.md](data/README.md)。
-- 插补与评估结果写入 `outputs/`。
-- 模型检查点写入 `artifacts/checkpoints/`。
-- 公共路径统一定义在 `mssa_transformer/config.py`，新增代码不应硬编码 `../data/...`。
-
-数据和已有实验结果总计超过 1 GB，已通过 `.gitignore` 排除。上传 GitHub 时只提交代码和目录说明；大模型权重请使用 Git LFS 或 GitHub Releases。
+数据集、运行结果和模型权重不随仓库发布，相关目录由使用者在本地准备或由程序运行时生成。公共路径定义在 `mssa_transformer/config.py`，新增代码不应硬编码绝对路径。
 
 ## 测试
 
@@ -185,18 +174,8 @@ python main.py --info structured
 
 更多开发约定见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
-## 上传 GitHub
+## 项目仓库
 
-本目录当前未初始化 Git 仓库。确认 `.gitignore` 后执行：
+GitHub：[czh4994/mSSA-transformer](https://github.com/czh4994/mSSA-transformer)
 
-```powershell
-git init
-git add .
-git status
-git commit -m "Initial project cleanup"
-git branch -M main
-git remote add origin https://github.com/<your-name>/<your-repository>.git
-git push -u origin main
-```
-
-上传前请根据项目的公开方式补充合适的 `LICENSE`，并确认 SWaT/WADI 数据及第三方代码的授权要求。
+公开使用前请补充合适的 `LICENSE`，并确认 SWaT/WADI 数据及第三方代码的授权要求。
