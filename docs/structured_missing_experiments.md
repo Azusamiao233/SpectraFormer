@@ -24,7 +24,7 @@
 - **Sensor–Actuator**：同时遮蔽一个有直接工艺关系的传感器—执行器组。
 - **Subsystem**：同时遮蔽同一处理阶段或控制回路内的多个变量。
 
-变量组集中定义在 `mssa_transformer/structured_missingness.py`，运行产生的每个
+变量组集中定义在 `spectraformer/structured_missingness.py`，运行产生的每个
 `metrics.json` 也会保存实际变量名和半开区间 `[start, end)`，便于审计。
 
 ## 变量组

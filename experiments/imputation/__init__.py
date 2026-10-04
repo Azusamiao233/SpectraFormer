@@ -1,2 +1,2 @@
-"""MSSA-Transformer 插补实验。"""
+"""SpectraFormer 插补实验。"""
 

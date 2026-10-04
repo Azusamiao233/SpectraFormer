@@ -1,5 +1,5 @@
 """
-谱感知MSSA-Transformer缺失值填补测试代码
+谱感知SpectraFormer缺失值填补测试代码
 基于spectral attention bias的改进版本，结合MSSA特征处理
 """
 
@@ -13,11 +13,11 @@ from typing import Dict, List, Tuple, Optional
 warnings.filterwarnings('ignore')
 
 # 导入基础模块
-from mssa_transformer.mssa.mssa1 import MSSA, setup_chinese_fonts
-from mssa_transformer.transformer.transformer_imputation_mssa_mlp_bias import (
+from spectraformer.mssa.mssa1 import MSSA, setup_chinese_fonts
+from spectraformer.transformer.transformer_imputation_mssa_mlp_bias import (
     SpectralMSSATransformerImputer,
 )
-from mssa_transformer.config import DATA_DIR, imputation_output_path
+from spectraformer.config import DATA_DIR, imputation_output_path
 from sklearn.preprocessing import StandardScaler
 import matplotlib.font_manager as fm
 
@@ -139,7 +139,7 @@ def visualize_results(data_with_missing, imputed_data, true_data, missing_mask,
                       c='red', s=20, label='谱感知填补值', zorder=5, alpha=0.8)
 
         feat_name = feat if isinstance(feat, str) else f'Feature_{feat_idx}'
-        ax.set_title(f'{feat_name} - 谱感知MSSA-Transformer填补结果')
+        ax.set_title(f'{feat_name} - 谱感知SpectraFormer填补结果')
         ax.set_ylabel('值')
         ax.legend(loc='upper right')
         ax.grid(True, alpha=0.3)
@@ -307,9 +307,9 @@ def plot_training_progress(train_losses: List[float], val_losses: List[float]):
 
 
 def main():
-    """主函数：谱感知MSSA-Transformer缺失值填补流程"""
+    """主函数：谱感知SpectraFormer缺失值填补流程"""
     print("="*80)
-    print("谱感知MSSA-Transformer缺失值填补系统测试")
+    print("谱感知SpectraFormer缺失值填补系统测试")
     print("="*80)
 
     # ===== 配置参数 =====
@@ -414,7 +414,7 @@ def main():
     mssa_model.plot_singular_spectrum(figsize=(12, 5))
 
     # ===== 4. 创建谱感知填补器 =====
-    print("\n创建谱感知MSSA-Transformer填补器...")
+    print("\n创建谱感知SpectraFormer填补器...")
 
     imputer = SpectralMSSATransformerImputer(
         mssa_window_length=MSSA_WINDOW_LENGTH,
@@ -427,7 +427,7 @@ def main():
     )
 
     # ===== 5. 训练模型 =====
-    print("\n开始训练谱感知MSSA-Transformer模型...")
+    print("\n开始训练谱感知SpectraFormer模型...")
     print(f"使用融合方法: {FUSION_METHOD}")
     print(f"使用谱偏置: {USE_SPECTRAL_BIAS}")
 
@@ -581,8 +581,8 @@ def main():
             columns=data_with_missing_df.columns
         )
 
-    result_df.to_csv(imputation_output_path("spectral_mssa_transformer_imputed.csv"))
-    print("填补结果已保存到: spectral_mssa_transformer_imputed.csv")
+    result_df.to_csv(imputation_output_path("spectral_spectraformer_imputed.csv"))
+    print("填补结果已保存到: spectral_spectraformer_imputed.csv")
 
     # 保存评估报告
     if true_data is not None and metrics is not None:
@@ -608,7 +608,7 @@ def main():
         print("评估报告已保存到: spectral_imputation_report.json")
 
     print("\n" + "="*80)
-    print("谱感知MSSA-Transformer缺失值填补测试完成！")
+    print("谱感知SpectraFormer缺失值填补测试完成！")
     print("="*80)
 
     return final_imputed_data, metrics if true_data is not None else None, model_info
@@ -702,7 +702,7 @@ def demo_spectral_features():
 
 if __name__ == "__main__":
     # 运行主测试流程
-    print("开始谱感知MSSA-Transformer缺失值填补测试...")
+    print("开始谱感知SpectraFormer缺失值填补测试...")
 
     try:
         # 主要测试流程

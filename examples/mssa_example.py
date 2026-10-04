@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from mssa_transformer.mssa import MSSA, setup_chinese_fonts
+from spectraformer.mssa import MSSA, setup_chinese_fonts
 from matplotlib.colors import Normalize
 
 

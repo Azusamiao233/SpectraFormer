@@ -32,8 +32,8 @@ from typing import Any, Callable, Dict, Iterable, List, Optional, Sequence, Tupl
 import numpy as np
 import pandas as pd
 
-from mssa_transformer.config import DATA_DIR, STRUCTURED_EXPERIMENT_OUTPUT_DIR
-from mssa_transformer.structured_missingness import (
+from spectraformer.config import DATA_DIR, STRUCTURED_EXPERIMENT_OUTPUT_DIR
+from spectraformer.structured_missingness import (
     DATASET_SPECS,
     PATTERN_NAMES,
     apply_structured_missing,
@@ -404,8 +404,8 @@ def train_method(method: str, data: PreparedData, args: argparse.Namespace) -> T
     elif method in PROPOSED_METHODS:
         try:
             import torch
-            from mssa_transformer.mssa.mssa1 import MSSA
-            from mssa_transformer.transformer.transformer_imputation_mssa_mlp_re_bias import (
+            from spectraformer.mssa.mssa1 import MSSA
+            from spectraformer.transformer.transformer_imputation_mssa_mlp_re_bias import (
                 SpectralMSSATransformerImputer,
             )
         except ImportError as exc:
@@ -507,7 +507,7 @@ def impute_method(
         imputed_scaled = result.reshape(-1, result.shape[-1])
     else:
         def call() -> np.ndarray:
-            from mssa_transformer.mssa.mssa1 import MSSA
+            from spectraformer.mssa.mssa1 import MSSA
 
             test_mssa = None
             if trained.extra.get("uses_mssa", False):

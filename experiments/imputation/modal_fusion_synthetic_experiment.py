@@ -1,5 +1,5 @@
 """
-可学习模态融合MSSA-Transformer缺失值填补完整测试示例
+可学习模态融合SpectraFormer缺失值填补完整测试示例
 演示如何使用带有可学习模态融合的MSSA+Transformer模型进行时间序列缺失值填补
 """
 
@@ -8,7 +8,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import warnings
 from typing import Dict, Tuple, Optional
-from mssa_transformer.config import DATA_DIR, imputation_output_path
+from spectraformer.config import DATA_DIR, imputation_output_path
 
 warnings.filterwarnings('ignore')
 
@@ -173,7 +173,7 @@ def test_modal_fusion_imputation(df_missing, df_complete, missing_mask,
     print("\n创建并训练模型...")
 
     # 这里导入实际的模型类
-    from mssa_transformer.transformer.transformer_imputation_mssa_mlp_re import (
+    from spectraformer.transformer.transformer_imputation_mssa_mlp_re import (
         MSSATransformerImputerMLPFixed,
     )
 

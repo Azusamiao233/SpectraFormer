@@ -7,7 +7,7 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.holtwinters import ExponentialSmoothing
 from statsmodels.tsa.arima.model import ARIMA
 import warnings
-from mssa_transformer.config import DATA_DIR, baseline_output_path
+from spectraformer.config import DATA_DIR, baseline_output_path
 
 warnings.filterwarnings('ignore')
 

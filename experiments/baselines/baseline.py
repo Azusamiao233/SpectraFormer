@@ -41,7 +41,7 @@ from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
 from sklearn.impute import SimpleImputer, KNNImputer
 import matplotlib.pyplot as plt
 import warnings
-from mssa_transformer.config import DATA_DIR
+from spectraformer.config import DATA_DIR
 
 warnings.filterwarnings('ignore')
 

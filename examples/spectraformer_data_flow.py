@@ -6,14 +6,14 @@ MSSA输出与Transformer输入连接详解
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from mssa_transformer.mssa import MSSA, setup_chinese_fonts
+from spectraformer.mssa import MSSA, setup_chinese_fonts
 
 # 设置中文字体
 setup_chinese_fonts()
 np.random.seed(42)
 
 
-def demonstrate_mssa_transformer_connection():
+def demonstrate_spectraformer_connection():
     """
     演示MSSA输出如何连接到Transformer输入
     """
@@ -332,10 +332,10 @@ def create_transformer_ready_data(data, mssa_model, method='full'):
 
 if __name__ == "__main__":
     # 运行演示
-    print("开始MSSA-Transformer连接演示...\n")
+    print("开始SpectraFormer连接演示...\n")
 
     # 主要演示
-    df, mssa, features_full, features_missing = demonstrate_mssa_transformer_connection()
+    df, mssa, features_full, features_missing = demonstrate_spectraformer_connection()
 
     # 数据流程说明
     explain_data_flow()

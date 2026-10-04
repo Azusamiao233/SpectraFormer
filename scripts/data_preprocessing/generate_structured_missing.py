@@ -8,8 +8,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from mssa_transformer.config import DATA_DIR, MASKED_DATA_DIR
-from mssa_transformer.structured_missingness import (
+from spectraformer.config import DATA_DIR, MASKED_DATA_DIR
+from spectraformer.structured_missingness import (
     DATASET_SPECS,
     PATTERN_NAMES,
     apply_structured_missing,

@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.linalg import hankel, svd
-from mssa_transformer.config import DATA_DIR
+from spectraformer.config import DATA_DIR
 
 import numpy as np  # 确保导入 numpy
 

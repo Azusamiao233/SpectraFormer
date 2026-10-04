@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-from mssa_transformer.config import DATA_DIR
+from spectraformer.config import DATA_DIR
 
 
 def remove_last_n_lines(csv_file, num_lines):

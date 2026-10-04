@@ -1,5 +1,5 @@
 """
-改进的MSSA-Transformer缺失值填补 - 使用标准对角平均
+改进的SpectraFormer缺失值填补 - 使用标准对角平均
 本版本修改了MSSA和Transformer的结合方式，使用标准对角平均而非特征拼接
 """
 
@@ -14,15 +14,15 @@ from typing import Dict, List, Tuple, Optional
 warnings.filterwarnings('ignore')
 
 # 导入基础模块
-from mssa_transformer.mssa import MSSA, setup_chinese_fonts
-from mssa_transformer.transformer.transformer_imputation import (
+from spectraformer.mssa import MSSA, setup_chinese_fonts
+from spectraformer.transformer.transformer_imputation import (
     PositionalEncoding,
     TimeSeriesDataset,
     TransformerImputer,
 )
 from sklearn.preprocessing import StandardScaler
 import torch.utils.data
-from mssa_transformer.config import DATA_DIR, imputation_output_path
+from spectraformer.config import DATA_DIR, imputation_output_path
 
 # 设置中文字体
 setup_chinese_fonts()
@@ -34,7 +34,7 @@ torch.manual_seed(42)
 
 class ImprovedMSSATransformerImputer:
     """
-    改进的MSSA-Transformer缺失值填补器
+    改进的SpectraFormer缺失值填补器
     使用标准对角平均方式结合MSSA分解和Transformer预测
     """
 
@@ -589,7 +589,7 @@ def visualize_results(data_with_missing, imputed_data, true_data, missing_mask,
             ax.scatter(missing_times, imputed_values,
                       c='red', s=20, label='填补值', zorder=5, alpha=0.8)
 
-        ax.set_title(f'{feat} - 改进的MSSA-Transformer填补结果')
+        ax.set_title(f'{feat} - 改进的SpectraFormer填补结果')
         ax.set_ylabel('值')
         ax.legend(loc='upper right')
         ax.grid(True, alpha=0.3)
@@ -600,9 +600,9 @@ def visualize_results(data_with_missing, imputed_data, true_data, missing_mask,
 
 
 def main():
-    """主函数：改进的MSSA-Transformer缺失值填补流程"""
+    """主函数：改进的SpectraFormer缺失值填补流程"""
     print("="*70)
-    print("改进的MSSA-Transformer缺失值填补 - 使用标准对角平均")
+    print("改进的SpectraFormer缺失值填补 - 使用标准对角平均")
     print("="*70)
 
     # 配置参数
@@ -656,7 +656,7 @@ def main():
     )
 
     # 4. 训练模型
-    print("\n开始训练改进的MSSA-Transformer模型...")
+    print("\n开始训练改进的SpectraFormer模型...")
     train_losses, val_losses = imputer.train(
         train_data,
         val_data,
@@ -739,7 +739,7 @@ def main():
         features_to_plot=None
     )
 
-    print("\n改进的MSSA-Transformer填补流程完成！")
+    print("\n改进的SpectraFormer填补流程完成！")
 
     return imputed_data, metrics if true_data is not None else None
 

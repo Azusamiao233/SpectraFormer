@@ -1,5 +1,5 @@
 """
-MSSA-Transformer可学习模态融合缺失值填补完整示例 - 使用现成数据版本
+SpectraFormer可学习模态融合缺失值填补完整示例 - 使用现成数据版本
 演示如何使用MSSA分解和Transformer模型结合可学习模态融合进行时间序列缺失值填补
 """
 
@@ -13,11 +13,11 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 warnings.filterwarnings('ignore')
 
 # 导入必要的模块（假设已经有mssa.py和transformer_imputation_mssa_mlp_re.py）
-from mssa_transformer.mssa import MSSA, setup_chinese_fonts
-from mssa_transformer.transformer.transformer_imputation_mssa_mlp_re import (
+from spectraformer.mssa import MSSA, setup_chinese_fonts
+from spectraformer.transformer.transformer_imputation_mssa_mlp_re import (
     MSSATransformerImputerMLPFixed,
 )
-from mssa_transformer.config import DATA_DIR, imputation_output_path
+from spectraformer.config import DATA_DIR, imputation_output_path
 
 # 设置中文字体
 setup_chinese_fonts()
@@ -409,7 +409,7 @@ def impute_and_evaluate_modal(imputer, data_with_missing, true_data, missing_mas
                 f'imputation_report_{method_name.lower()}.txt'
             )
             with open(report_filename, 'w', encoding='utf-8') as f:
-                f.write(f"MSSA-Transformer {method_name} 缺失值填补报告\n")
+                f.write(f"SpectraFormer {method_name} 缺失值填补报告\n")
                 f.write("="*60 + "\n\n")
                 f.write(f"数据集大小: {data_with_missing.shape}\n")
                 f.write(f"缺失值总数: {missing_mask.sum()}\n")
@@ -619,10 +619,10 @@ def compare_modal_fusion_methods(data_with_missing, true_data, missing_mask,
 
 def main():
     """
-    主函数：MSSA-Transformer模态融合缺失值填补流程
+    主函数：SpectraFormer模态融合缺失值填补流程
     """
     print("="*70)
-    print("MSSA-Transformer可学习模态融合缺失值填补实验")
+    print("SpectraFormer可学习模态融合缺失值填补实验")
     print("="*70)
 
     # 配置参数

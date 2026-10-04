@@ -2,7 +2,7 @@ import unittest
 from importlib.util import find_spec
 from unittest.mock import patch
 
-from mssa_transformer.cli import MODEL_REGISTRY, format_model_list, main
+from spectraformer.cli import MODEL_REGISTRY, format_model_list, main
 
 
 class CliTests(unittest.TestCase):
@@ -28,14 +28,14 @@ class CliTests(unittest.TestCase):
         self.assertTrue(mocked_print.called)
 
     def test_legacy_arguments_default_to_structured_experiment(self):
-        with patch("mssa_transformer.cli.run_model", return_value=0) as mocked_run:
+        with patch("spectraformer.cli.run_model", return_value=0) as mocked_run:
             result = main(["--plan"])
         self.assertEqual(result, 0)
         self.assertEqual(mocked_run.call_args.args[0].key, "structured")
         self.assertEqual(mocked_run.call_args.args[1], ["--plan"])
 
     def test_explicit_model_receives_forwarded_arguments(self):
-        with patch("mssa_transformer.cli.run_model", return_value=0) as mocked_run:
+        with patch("spectraformer.cli.run_model", return_value=0) as mocked_run:
             result = main(["--model", "structured", "--", "--plan"])
         self.assertEqual(result, 0)
         self.assertEqual(mocked_run.call_args.args[0].key, "structured")

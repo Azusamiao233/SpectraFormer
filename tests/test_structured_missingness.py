@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from mssa_transformer.structured_missingness import (
+from spectraformer.structured_missingness import (
     DATASET_SPECS,
     apply_structured_missing,
     generate_block_rows,

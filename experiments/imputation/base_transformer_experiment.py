@@ -1,5 +1,5 @@
 """
-MSSA-Transformer缺失值填补完整示例 - 使用现成数据版本
+SpectraFormer缺失值填补完整示例 - 使用现成数据版本
 演示如何使用MSSA分解和Transformer模型进行时间序列缺失值填补
 """
 
@@ -14,9 +14,9 @@ from sympy import false
 warnings.filterwarnings('ignore')
 
 # 导入必要的模块（假设已经有mssa.py和transformer_imputation.py）
-from mssa_transformer.mssa import MSSA, setup_chinese_fonts
-from mssa_transformer.transformer.transformer_imputation import MSSATransformerImputer
-from mssa_transformer.config import DATA_DIR, imputation_output_path
+from spectraformer.mssa import MSSA, setup_chinese_fonts
+from spectraformer.transformer.transformer_imputation import MSSATransformerImputer
+from spectraformer.config import DATA_DIR, imputation_output_path
 
 # 设置中文字体
 setup_chinese_fonts()
@@ -247,7 +247,7 @@ def impute_and_evaluate(imputer, data_with_missing, true_data, missing_mask,
         # 保存评估报告
         if metrics:
             with open(imputation_output_path("imputation_report.txt"), 'w', encoding='utf-8') as f:
-                f.write("MSSA-Transformer缺失值填补报告\n")
+                f.write("SpectraFormer缺失值填补报告\n")
                 f.write("="*50 + "\n\n")
                 f.write(f"数据集大小: {data_with_missing.shape}\n")
                 f.write(f"缺失值总数: {missing_mask.sum()}\n")
@@ -311,10 +311,10 @@ def visualize_results(data_with_missing, imputed_data, true_data, missing_mask,
 
 def main():
     """
-    主函数：使用现成数据的MSSA-Transformer缺失值填补流程
+    主函数：使用现成数据的SpectraFormer缺失值填补流程
     """
     print("="*60)
-    print("MSSA-Transformer缺失值填补 - 使用现成数据")
+    print("SpectraFormer缺失值填补 - 使用现成数据")
     print("="*60)
 
     # 配置参数
@@ -331,7 +331,7 @@ def main():
 
     # 是否使用WandB
     USE_WANDB = False
-    WANDB_PROJECT = "mssa-transformer-imputation"
+    WANDB_PROJECT = "spectra-former-imputation"
 
     # 1. 加载数据
     data_with_missing, true_data, missing_mask = load_data_with_missing(
@@ -479,7 +479,7 @@ def run_experiments(data_path, true_data_path=None):
             val_data,
             mssa_model=mssa_model,
             use_wandb= False,
-            wandb_project="mssa-transformer-experiments",
+            wandb_project="spectra-former-experiments",
             config=exp['transformer_config']
         )
 

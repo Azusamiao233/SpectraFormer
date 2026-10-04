@@ -12,11 +12,11 @@ import torch
 warnings.filterwarnings('ignore')
 
 # 导入必要的模块
-from mssa_transformer.mssa.mssa1 import MSSA, setup_chinese_fonts
-from mssa_transformer.transformer.transformer_imputation_mssa_mlp_re_bias import (
+from spectraformer.mssa.mssa1 import MSSA, setup_chinese_fonts
+from spectraformer.transformer.transformer_imputation_mssa_mlp_re_bias import (
     SpectralMSSATransformerImputer,
 )
-from mssa_transformer.config import DATA_DIR, imputation_output_path
+from spectraformer.config import DATA_DIR, imputation_output_path
 
 # 设置中文字体
 setup_chinese_fonts()

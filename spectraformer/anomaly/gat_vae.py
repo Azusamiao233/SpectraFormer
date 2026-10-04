@@ -10,7 +10,7 @@ from sklearn.metrics import (
 )
 from typing import Tuple, Dict, Optional
 import matplotlib.pyplot as plt
-from mssa_transformer.config import (
+from spectraformer.config import (
     CHECKPOINT_DIR,
     FIGURE_OUTPUT_DIR,
     MASKED_DATA_DIR,

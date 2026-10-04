@@ -11,7 +11,7 @@ from sklearn.preprocessing import StandardScaler
 import pandas as pd  # 添加pandas用于读取CSV
 import os
 import math
-from mssa_transformer.config import DATA_DIR, OUTPUTS_DIR
+from spectraformer.config import DATA_DIR, OUTPUTS_DIR
 
 
 GDN_OUTPUT_DIR = OUTPUTS_DIR / "anomaly_detection" / "gdn"

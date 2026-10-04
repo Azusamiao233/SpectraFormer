@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import random
 from typing import List, Optional
-from mssa_transformer.config import DATA_DIR, MASKED_DATA_DIR
+from spectraformer.config import DATA_DIR, MASKED_DATA_DIR
 
 
 def add_continuous_missing(input_file: str,

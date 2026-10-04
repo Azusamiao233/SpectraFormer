@@ -51,7 +51,7 @@ python -m pip install -e . --no-deps
 
 ```powershell
 python -c "import numpy, pandas, scipy, sklearn, matplotlib, torch, torch_geometric, pypots; print('dependencies: OK'); print('torch:', torch.__version__); print('cuda:', torch.cuda.is_available())"
-python -c "from mssa_transformer.mssa import MSSA; from mssa_transformer.transformer import TransformerImputer; print('project imports: OK')"
+python -c "from spectraformer.mssa import MSSA; from spectraformer.transformer import TransformerImputer; print('project imports: OK')"
 ```
 
 ## 5. 运行方式
@@ -65,17 +65,17 @@ python main.py --model spectral-modal
 ```
 
 直接执行 `python main.py` 可进入交互式菜单。安装为可编辑包后，也可以使用
-`mssa-transformer --model spectral-modal`。需要复现单个底层实验时，仍可使用
+`spectra-former --model spectral-modal`。需要复现单个底层实验时，仍可使用
 `python -m experiments...` 的模块方式。
 
-公共目录常量位于 `mssa_transformer/config.py`。新增脚本应从这里导入 `DATA_DIR`、`OUTPUTS_DIR` 或对应子目录，不要再写依赖当前工作目录的 `../data/...`。
+公共目录常量位于 `spectraformer/config.py`。新增脚本应从这里导入 `DATA_DIR`、`OUTPUTS_DIR` 或对应子目录，不要再写依赖当前工作目录的 `../data/...`。
 
 ## 6. 常见问题
 
-- `ModuleNotFoundError: mssa_transformer`：确认当前目录是项目根目录，并执行过 `python -m pip install -e . --no-deps`。
+- `ModuleNotFoundError: spectraformer`：确认当前目录是项目根目录，并执行过 `python -m pip install -e . --no-deps`。
 - `torch.cuda.is_available()` 为 `False`：通常是安装了 CPU 版 PyTorch，或驱动与所选 CUDA wheel 不匹配；重新使用 PyTorch 官方安装选择器。
 - PyG 扩展编译失败：先仅安装 `torch-geometric`。确需 `pyg-lib`、`torch-scatter` 或 `torch-sparse` 时，必须选择与 `torch.__version__` 和 `torch.version.cuda` 一致的 wheel。
-- 数据文件不存在：确认文件位于 `data/`，并通过 `mssa_transformer.config.DATA_DIR` 构造路径，避免使用相对当前目录的 `../data/...`。
+- 数据文件不存在：确认文件位于 `data/`，并通过 `spectraformer.config.DATA_DIR` 构造路径，避免使用相对当前目录的 `../data/...`。
 
 ## 7. 官方安装参考
 

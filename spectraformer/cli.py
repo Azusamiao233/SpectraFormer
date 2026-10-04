@@ -1,4 +1,4 @@
-"""MSSA-Transformer 项目的统一命令行入口。"""
+"""SpectraFormer 项目的统一命令行入口。"""
 
 from __future__ import annotations
 
@@ -48,10 +48,10 @@ MODEL_ENTRIES: tuple[ModelEntry, ...] = (
     ),
     ModelEntry(
         "adaptive-transformer",
-        "自适应 MSSA-Transformer",
+        "自适应 SpectraFormer",
         "experiments.imputation.adaptive_transformer_experiment",
         "插补模型",
-        "带自适应融合策略的 MSSA-Transformer。",
+        "带自适应融合策略的 SpectraFormer。",
     ),
     ModelEntry(
         "mssa-mlp",
@@ -123,7 +123,7 @@ def configure_console_encoding() -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="统一选择并运行 MSSA-Transformer 项目中的模型与实验。",
+        description="统一选择并运行 SpectraFormer 项目中的模型与实验。",
         epilog=(
             "模型参数会原样转发，例如："
             "python main.py --model structured -- --plan"
@@ -180,7 +180,7 @@ def print_model_info(entry: ModelEntry) -> None:
 def choose_interactively() -> ModelEntry | None:
     """在终端中显示编号菜单并返回用户选择。"""
 
-    print("MSSA-Transformer 模型选择器")
+    print("SpectraFormer 模型选择器")
     print("=" * 48)
     for index, entry in enumerate(MODEL_ENTRIES, start=1):
         marker = "（推荐）" if entry.recommended else ""

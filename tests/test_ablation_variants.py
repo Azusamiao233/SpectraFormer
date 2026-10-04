@@ -2,7 +2,7 @@ import unittest
 
 import torch
 
-from mssa_transformer.transformer.transformer_imputation_mssa_mlp_re_bias import (
+from spectraformer.transformer.transformer_imputation_mssa_mlp_re_bias import (
     SpectralAwareTransformerImputerMSSAMLP,
 )
 

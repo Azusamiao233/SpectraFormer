@@ -9,8 +9,8 @@ from sklearn.preprocessing import StandardScaler
 import pickle
 import os
 import time
-from mssa_transformer.anomaly.gdn import GDN
-from mssa_transformer.config import DATA_DIR, OUTPUTS_DIR
+from spectraformer.anomaly.gdn import GDN
+from spectraformer.config import DATA_DIR, OUTPUTS_DIR
 
 
 GDN_OUTPUT_DIR = OUTPUTS_DIR / "anomaly_detection" / "gdn"

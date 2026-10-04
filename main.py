@@ -4,7 +4,7 @@
 ``python main.py`` 打开交互式选择菜单。
 """
 
-from mssa_transformer.cli import main
+from spectraformer.cli import main
 
 
 if __name__ == "__main__":

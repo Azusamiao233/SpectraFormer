@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-from mssa_transformer.config import DATA_DIR, OUTPUTS_DIR
+from spectraformer.config import DATA_DIR, OUTPUTS_DIR
 
 # 文件路径配置
 INPUT_FILE = str(DATA_DIR / "train_continuous_missing_40.csv")

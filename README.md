@@ -1,12 +1,12 @@
-# mSSA-Transformer
+# SpectraFormer
 
-面向多变量工业时间序列缺失值补全的研究代码。项目包含 MSSA 分解、Transformer 插补、谱注意力偏置、自适应模态融合，以及传统方法和 PyPOTS 基线。
+**SpectraFormer** 是一个面向多变量工业时间序列缺失值补全的谱感知 Transformer 项目。项目包含 MSSA 分解、Transformer 插补、谱注意力偏置、自适应模态融合，以及传统方法和 PyPOTS 基线。
 
-> 当前版本：`0.2.0`。根目录 [main.py](main.py) 是统一入口，可通过交互菜单或命令行选择不同模型版本。
+> 当前版本：`0.3.0`。根目录 [main.py](main.py) 是统一入口，可通过交互菜单或命令行选择不同模型版本。
 
 ## 功能概览
 
-- 多个 MSSA-Transformer 演进版本，可从同一个入口启动。
+- 多个 SpectraFormer 演进版本，可从同一个入口启动。
 - SWaT/WADI 结构化缺失生成、40% 缺失对比和消融实验。
 - 传统插值、SAITS、BRITS、iTransformer 等基线。
 - 源码、实验、示例和预处理工具分目录管理。
@@ -17,7 +17,7 @@
 ```text
 .
 ├── main.py                         # 统一模型选择入口
-├── mssa_transformer/               # 可复用核心包
+├── spectraformer/                  # 可复用核心包
 │   ├── cli.py                      # 模型注册表与命令行界面
 │   ├── config.py                   # 项目公共路径
 │   ├── structured_missingness.py   # 结构化缺失生成
@@ -37,7 +37,7 @@
 | `structured` | 结构化缺失综合实验 | SWaT/WADI、多缺失模式、基线和消融实验 |
 | `transformer` | 基础 Transformer | 基础时序插补版本 |
 | `transformer-kl` | Transformer + KL | 加入 KL 散度约束 |
-| `adaptive-transformer` | 自适应 MSSA-Transformer | 自适应融合 MSSA 信息 |
+| `adaptive-transformer` | 自适应 SpectraFormer | 自适应融合 MSSA 信息 |
 | `mssa-mlp` | MSSA + MLP + Transformer | 使用 MLP 编码 MSSA 模态 |
 | `modal-fusion` | 可学习模态融合 | 学习原始模态与 MSSA 模态权重 |
 | `spectral-bias` | 谱注意力偏置 | 频谱信息参与注意力计算 |
@@ -57,7 +57,7 @@ python main.py --info spectral-modal
 推荐 Python 3.10 或 3.11。Windows PowerShell：
 
 ```powershell
-cd "C:\path\to\mSSA_transformer"
+cd "C:\path\to\SpectraFormer"
 py -3.11 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip setuptools wheel
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
@@ -101,8 +101,8 @@ python main.py --model classical
 安装为可编辑包后，也可以使用：
 
 ```powershell
-mssa-transformer --list-models
-mssa-transformer --model spectral-modal
+spectra-former --list-models
+spectra-former --model spectral-modal
 ```
 
 模型自己的参数放在 `--` 后面。例如只检查结构化实验计划：
@@ -149,13 +149,13 @@ python main.py --model structured -- `
 
 ## 本地数据与运行结果
 
-数据集、运行结果和模型权重不随仓库发布，相关目录由使用者在本地准备或由程序运行时生成。公共路径定义在 `mssa_transformer/config.py`，新增代码不应硬编码绝对路径。
+数据集、运行结果和模型权重不随仓库发布，相关目录由使用者在本地准备或由程序运行时生成。公共路径定义在 `spectraformer/config.py`，新增代码不应硬编码绝对路径。
 
 ## 测试
 
 ```powershell
 python -m unittest discover -s tests -v
-python -m compileall -q mssa_transformer experiments examples scripts tests
+python -m compileall -q spectraformer experiments examples scripts tests
 ```
 
 只验证统一入口、不加载训练依赖：
@@ -167,15 +167,15 @@ python main.py --info structured
 
 ## 添加新模型
 
-1. 将可复用模型放入 `mssa_transformer/` 对应子包。
+1. 将可复用模型放入 `spectraformer/` 对应子包。
 2. 将训练或评估入口放入 `experiments/`。
-3. 在 `mssa_transformer/cli.py` 的 `MODEL_ENTRIES` 中注册入口。
+3. 在 `spectraformer/cli.py` 的 `MODEL_ENTRIES` 中注册入口。
 4. 添加测试，并更新本 README 的模型表。
 
 更多开发约定见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 项目仓库
 
-GitHub：[czh4994/mSSA-transformer](https://github.com/czh4994/mSSA-transformer)
+GitHub：[czh4994/SpectraFormer](https://github.com/czh4994/SpectraFormer)
 
 公开使用前请补充合适的 `LICENSE`，并确认 SWaT/WADI 数据及第三方代码的授权要求。
